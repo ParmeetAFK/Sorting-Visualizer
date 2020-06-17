@@ -1,14 +1,41 @@
 from tkinter import *
 from tkinter import ttk
+import time
 import random
-import fun
 #VARIABLES
 selected_algo = "Selection"
+global data
 
 # ------------------------------------------------- FUNCTIONS -------------------------------------------------
+def gendata():
+	global data
+	data = []
+	data = gen_num(25,10,100)
+	DrawData(data)
 
+
+def gen_num(scale,minv,maxv):
+	for i in range(0,scale):
+		data.append(random.randint(minv,maxv))
+	return data
+
+def selection_sort():
+	print("In sort ")
+	for i in range(len(data)):
+		print("in i")
+		min_val = data[i]
+		for j in range(len(data)):
+			print("in j")
+			if min_val < data[j]:
+				temp = data[i]
+				data[i] = data[j]
+				data[j] = temp
+				print(data)
+	DrawData(data)			
+	
 # --------------------------------------------------- DRAW GRAPH ----------------------------------------------
 def DrawData(data):
+	canI.delete("all")
 	c_width = 1000
 	c_height = 600
 	x_width = c_width / len(data) + 1 
@@ -85,7 +112,7 @@ combostyle.theme_create('combostyle', parent='alt',
 
 combostyle.theme_use('combostyle') 
 
-algoMenu = ttk.Combobox(userI,textvariable=selected_algo,values=['Bubblesort','Selection Sort'],width=20)
+algoMenu = ttk.Combobox(userI,textvariable=selected_algo,values=['Bubblesort','Selection Sort','Merge Sort','Insertion Sort','Quick Sort'],width=20)
 algoMenu.grid(row=4,column=0,padx=8,pady=8)
 algoMenu.current(0)
 
@@ -96,14 +123,14 @@ Label(userI,text='Scale',
 		    font=('Hobo Std',18)).grid(row=5,column=0,pady=8,padx=1,sticky=W)
 
 # -------------------------------------------------------- -GENERATE BUTTON------------------------------------
-gen = Button(userI,text='Generate Data')
+gen = Button(userI,text='Generate Data',
+			command=gendata)
 gen.grid(row = 7,column=0)
 
 #---------------------------------------------------- SORT BUTTON -------------------------------------------
-sort = Button(userI,text='START SORTING')
+sort = Button(userI,text='START SORTING',
+			  command=selection_sort)
 sort.grid(row=8,column=0)
 
-lol = fun.gen_num(100,0,1000)
 
-DrawData(lol)
 root.mainloop()
