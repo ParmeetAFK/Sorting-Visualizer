@@ -1,19 +1,19 @@
 from tkinter import *
 from tkinter import ttk
 import random
+import fun
 #VARIABLES
 selected_algo = "Selection"
 
 # ------------------------------------------------- FUNCTIONS -------------------------------------------------
 
-lol = [2,3,4,10,12,5,4,69,8,1,3,5]
 # --------------------------------------------------- DRAW GRAPH ----------------------------------------------
 def DrawData(data):
-	c_width = 800
+	c_width = 1000
 	c_height = 600
 	x_width = c_width / len(data) + 1 
 	offset = 3
-	spacing = 10
+	spacing = 1
 
 	#NORMALIAZING THE DATA
 
@@ -42,7 +42,7 @@ userI =Frame(root,height= 600, width= 200,bg='black')
 userI.grid(row = 0, column = 0,padx=8,pady=8,sticky=N)
 
 #-------------------------------------------------- CANVAS FRAME --------------------------------------------
-canI = Canvas(root, height=600,width=820)
+canI = Canvas(root, height=600,width=1200)
 canI.grid(row=0,column=1,padx=8,pady=8)
 
 # ---------------------------------------------- USER INTERFACE OPTIONS --------------------------------------
@@ -102,6 +102,8 @@ gen.grid(row = 7,column=0)
 #---------------------------------------------------- SORT BUTTON -------------------------------------------
 sort = Button(userI,text='START SORTING')
 sort.grid(row=8,column=0)
+
+lol = fun.gen_num(100,0,1000)
 
 DrawData(lol)
 root.mainloop()
