@@ -6,7 +6,7 @@ selected_algo = "Selection"
 
 # ------------------------------------------------- FUNCTIONS -------------------------------------------------
 
-lol = [2,3,4,1,3,5]
+lol = [2,3,4,10,12,5,4,69,8,1,3,5]
 # --------------------------------------------------- DRAW GRAPH ----------------------------------------------
 def DrawData(data):
 	c_width = 800
@@ -47,21 +47,26 @@ canI.grid(row=0,column=1,padx=8,pady=8)
 
 # ---------------------------------------------- USER INTERFACE OPTIONS --------------------------------------
 # --------------------------------------------------- HEADING ------------------------------------------------
-Label(userI,text='Sort bot',
+Label(userI,text='Sort',
 			  fg='white',
 			  bg='black',
-			  font=('Algerian',20)).grid(row=0,column=0,padx=8)
+			  font=('Fugaz One',40)).grid(row=0,column=0,padx=8)
 
-Label(userI,text='------------------------------------------------------------------------------',
+Label(userI,text='Boy',
 			  fg='white',
 			  bg='black',
-			  font=('Algerian',10)).grid(row=1,column=0,pady=1,padx=1,columnspan=2)
+			  font=('Fugaz One',35)).grid(row=1,column=0,padx=8)
+
+Label(userI,text='------------------------------',
+			  fg='white',
+			  bg='black',
+			  font=('Algerian',10)).grid(row=2,column=0,pady=1,padx=1,columnspan=2)
 
 #--------------------------------------------------- SELECT ALGO --------------------------------------------
-Label(userI,text='Algorithm -------------------- ',
+Label(userI,text='Algorithm',
 			  fg='white',
 			  bg='black',
-			  font=('Arial Bold',20),).grid(row=2,column=0,padx=1,pady=8,sticky=W)
+			  font=('Hobo Std',18),).grid(row=3,column=0,padx=1,pady=8,sticky=W)
 
 # ------------------------------------------------- COMBOBOX ------------------------------------------------
 
@@ -80,23 +85,23 @@ combostyle.theme_create('combostyle', parent='alt',
 
 combostyle.theme_use('combostyle') 
 
-algoMenu = ttk.Combobox(userI,textvariable=selected_algo,values=['Bubblesort','Selection Sort'],width=50)
-algoMenu.grid(row=3,column=0,padx=8,pady=8)
+algoMenu = ttk.Combobox(userI,textvariable=selected_algo,values=['Bubblesort','Selection Sort'],width=20)
+algoMenu.grid(row=4,column=0,padx=8,pady=8)
 algoMenu.current(0)
 
 # ------------------------------------------------------- SCALING -------------------------------------------
-Label(userI,text='Scale ---------------------------',
+Label(userI,text='Scale',
 			fg='white',
 			bg='black',
-		    font=('Arial Bold',20)).grid(row=4,column=0,pady=8,padx=1,sticky=W)
+		    font=('Hobo Std',18)).grid(row=5,column=0,pady=8,padx=1,sticky=W)
 
 # -------------------------------------------------------- -GENERATE BUTTON------------------------------------
 gen = Button(userI,text='Generate Data')
-gen.grid(row = 6,column=0)
+gen.grid(row = 7,column=0)
 
 #---------------------------------------------------- SORT BUTTON -------------------------------------------
 sort = Button(userI,text='START SORTING')
-sort.grid(row=7,column=0)
+sort.grid(row=8,column=0)
 
 DrawData(lol)
 root.mainloop()
