@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import time
 import random
+
 #VARIABLES
 selected_algo = "Selection"
 global data
@@ -10,7 +11,7 @@ global data
 def gendata():
 	global data
 	data = []
-	data = gen_num(25,10,100)
+	data = gen_num(200,10,1000)
 	DrawData(data)
 
 
@@ -21,18 +22,23 @@ def gen_num(scale,minv,maxv):
 
 def selection_sort():
 	print("In sort ")
+
 	for i in range(len(data)):
-		print("in i")
 		min_val = data[i]
 		for j in range(len(data)):
-			print("in j")
 			if min_val < data[j]:
 				temp = data[i]
 				data[i] = data[j]
 				data[j] = temp
-				print(data)
-	DrawData(data)			
-	
+	DrawData(data)
+
+def bubble():
+	n = len(data)
+	for i in range(n):
+		for j in range(0, n-i-1):
+			if data[j] > data[j+1]:
+				data[j], data[j+1] = data[j+1], data[j]	
+		DrawData(data)
 # --------------------------------------------------- DRAW GRAPH ----------------------------------------------
 def DrawData(data):
 	canI.delete("all")
@@ -129,7 +135,7 @@ gen.grid(row = 7,column=0)
 
 #---------------------------------------------------- SORT BUTTON -------------------------------------------
 sort = Button(userI,text='START SORTING',
-			  command=selection_sort)
+			  command=bubble)
 sort.grid(row=8,column=0)
 
 

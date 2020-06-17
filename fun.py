@@ -1,12 +1,36 @@
-lol = [87, 84, 60, 76, 12, 35, 90, 92, 82, 33, 96, 80, 95, 33, 71, 36, 63, 12, 28, 75, 72, 58, 77, 79, 41]
+from tkinter import *
 
-for i in range(len(lol)):
-	min_val = lol[i]
-	for j in range(len(lol)):
-		if min_val < lol[j]:
-			temp = lol[i]
-			lol[i] = lol[j]
-			lol[j] = temp
+root = Tk()
 
-print("SORTED")
-print(lol)
+def su():
+	sum = 0
+	sum = int(e1.get()) + int(e2.get())
+	print(sum)
+
+root.title("Boo App")
+root.config(bg='black')
+
+head = Label(root,text='Calculator',
+			font=('Arial Bold',20),
+			fg='white',
+			bg='black')
+head.pack()
+
+a = Label(root,text='a')
+a.pack()
+
+e1 = Entry(root)
+e1.pack()
+
+b = Label(root,text='b')
+b.pack()
+
+e2 = Entry(root)
+e2.pack()
+
+add = Button(root,text='ADD them',command=su)
+add.pack()
+
+
+
+root.mainloop()
