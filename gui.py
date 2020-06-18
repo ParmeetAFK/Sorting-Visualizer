@@ -11,7 +11,7 @@ global data
 def gendata():
 	global data
 	data = []
-	data = gen_num(200,10,1000)
+	data = gen_num(5,10,1000)
 	DrawData(data)
 
 
@@ -61,7 +61,7 @@ def DrawData(data):
 	#(x,y,width,height)
 	#(x0,y0,x1,y1)
 		canI.create_rectangle(x0,y0,x1,y1,fill='black')
-		#canI.create_text(x0 + 2 , y0, anchor=SW, text=data[i])
+		canI.create_text(x0 + 2 , y0, anchor=SW, text=data[i])
 	root.update()
 
 
@@ -129,15 +129,17 @@ Label(userI,text='Scale',
 			bg='black',
 		    font=('Hobo Std',18)).grid(row=5,column=0,pady=8,padx=1,sticky=W)
 
+Scale(userI,from_=10,to=1000,bg='black',fg='white',orient=HORIZONTAL,length=220).grid(row=6,column=0,pady=4,padx=8)
+
 # -------------------------------------------------------- -GENERATE BUTTON------------------------------------
 gen = Button(userI,text='Generate Data',
-			command=gendata)
-gen.grid(row = 7,column=0)
+			command=gendata,bg='black',fg='white',height=1,width=15,borderwidth=10,font=('Fugaz One',15))
+gen.grid(row = 7,column=0,pady=25,padx=8)
 
 #---------------------------------------------------- SORT BUTTON -------------------------------------------
 sort = Button(userI,text='START SORTING',
-			  command=bubble)
-sort.grid(row=8,column=0)
+			  command=bubble,bg='black',fg='white',height=1,width=15,borderwidth=10,font=('Fugaz One',15))
+sort.grid(row=8,column=0,pady=0,padx=8)
 
 
 root.mainloop()
