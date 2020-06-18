@@ -60,8 +60,9 @@ def DrawData(data):
 
 	#(x,y,width,height)
 	#(x0,y0,x1,y1)
-		canI.create_rectangle(x0,y0,x1,y1,fill='red')
-		canI.create_text(x0 + 2 , y0, anchor=SW, text=data[i])
+		canI.create_rectangle(x0,y0,x1,y1,fill='black')
+		#canI.create_text(x0 + 2 , y0, anchor=SW, text=data[i])
+	root.update()
 
 
 # ----------------------------------------------- ROOT INIT() ------------------------------------------------
