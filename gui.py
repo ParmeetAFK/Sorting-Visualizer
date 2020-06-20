@@ -6,18 +6,24 @@ import random
 #VARIABLES
 selected_algo = "Selection"
 global data
-
+global zo
+status = 'Hello World'
 # ------------------------------------------------- FUNCTIONS -------------------------------------------------
 def gendata():
 	global data
 	data = []
-	data = gen_num(5,10,1000)
+	s_val = sca.get()
+	
+	data = gen_num(s_val,10,1000)
 	DrawData(data)
-
 
 def gen_num(scale,minv,maxv):
 	for i in range(0,scale):
 		data.append(random.randint(minv,maxv))
+		lol = ['This is good data','Thats Sweet','I can sort that easily','Watch me sort this data','Select One and let me sort']
+		status = lol[random.randint(0,4)]
+		
+		caption(status)
 	return data
 
 def selection_sort():
@@ -30,6 +36,7 @@ def selection_sort():
 				temp = data[i]
 				data[i] = data[j]
 				data[j] = temp
+
 	DrawData(data)
 
 def bubble():
@@ -39,6 +46,7 @@ def bubble():
 			if data[j] > data[j+1]:
 				data[j], data[j+1] = data[j+1], data[j]	
 		DrawData(data)
+
 # --------------------------------------------------- DRAW GRAPH ----------------------------------------------
 def DrawData(data):
 	canI.delete("all")
@@ -61,14 +69,14 @@ def DrawData(data):
 	#(x,y,width,height)
 	#(x0,y0,x1,y1)
 		canI.create_rectangle(x0,y0,x1,y1,fill='black')
-		canI.create_text(x0 + 2 , y0, anchor=SW, text=data[i])
+		#canI.create_text(x0 + 2 , y0, anchor=SW, text=data[i])
 	root.update()
 
 
 # ----------------------------------------------- ROOT INIT() ------------------------------------------------
 
 root = Tk()
-root.title("SORTING BOY")
+root.title("Wayne Power")
 root.config(bg="black")
 
 #----------------------------------------------------UI FRAME -----------------------------------------------
@@ -76,17 +84,27 @@ userI =Frame(root,height= 600, width= 200,bg='black')
 userI.grid(row = 0, column = 0,padx=8,pady=8,sticky=N)
 
 #-------------------------------------------------- CANVAS FRAME --------------------------------------------
-canI = Canvas(root, height=600,width=1200)
-canI.grid(row=0,column=1,padx=8,pady=8)
+canI = Canvas(root, height=600,width=1085)
+canI.grid(row=0,column=1,padx=5,pady=8)
+
+#------------------------------------------------- STATUS --------------------------------------------------
+def caption(status):
+	zo = Label(root,text=status,
+				  fg='white',
+				  bg='black',
+				  font=('Fugaz One',40))
+	zo.grid(row=1,column=1,padx=0,pady=2)
+
+	zo.destroy()
 
 # ---------------------------------------------- USER INTERFACE OPTIONS --------------------------------------
 # --------------------------------------------------- HEADING ------------------------------------------------
-Label(userI,text='Sort',
+Label(userI,text='Wayne',
 			  fg='white',
 			  bg='black',
 			  font=('Fugaz One',40)).grid(row=0,column=0,padx=8)
 
-Label(userI,text='Boy',
+Label(userI,text='Enterprise',
 			  fg='white',
 			  bg='black',
 			  font=('Fugaz One',35)).grid(row=1,column=0,padx=8)
@@ -129,7 +147,8 @@ Label(userI,text='Scale',
 			bg='black',
 		    font=('Hobo Std',18)).grid(row=5,column=0,pady=8,padx=1,sticky=W)
 
-Scale(userI,from_=10,to=1000,bg='black',fg='white',orient=HORIZONTAL,length=220).grid(row=6,column=0,pady=4,padx=8)
+sca = Scale(userI,from_=10,to=1000,bg='black',fg='white',orient=HORIZONTAL,length=220)
+sca.grid(row=6,column=0,pady=4,padx=8)
 
 # -------------------------------------------------------- -GENERATE BUTTON------------------------------------
 gen = Button(userI,text='Generate Data',
