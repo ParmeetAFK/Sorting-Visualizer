@@ -6,29 +6,55 @@ import random
 #VARIABLES
 selected_algo = "Selection"
 global data
-global zo
 status = 'Hello World'
 # ------------------------------------------------- FUNCTIONS -------------------------------------------------
+# --------------------------------------------- RANDOM DATA GENERATOR ----------------------------------------
 def gendata():
 	global data
 	data = []
 	s_val = sca.get()
-	
 	data = gen_num(s_val,10,1000)
 	DrawData(data)
 
+#------------------------------------------------- STATUS --------------------------------------------------
+def caption(status):
+	zo = Label(root,text=status,
+				  fg='white',
+				  bg='black',
+				  font=('Fugaz One',40),
+				  width=25)
+	zo.grid(row=1,column=1,padx=0,pady=2)
+
+
+# ------------------------------------------- GETS SCALE NUMBER ---------------------------------------------
 def gen_num(scale,minv,maxv):
 	for i in range(0,scale):
 		data.append(random.randint(minv,maxv))
-		lol = ['This is good data','Thats Sweet','I can sort that easily','Watch me sort this data','Select One and let me sort']
-		status = lol[random.randint(0,4)]
-		
+		lol = ['This is good data','Thats Sweet','You look good today','Keep Going','I can sort that easily','Watch me sort this data','Select One and let me sort']
+		status = lol[random.randint(0,6)]
 		caption(status)
 	return data
 
-def selection_sort():
-	print("In sort ")
+def whatsort():
+	#'Bubblesort','Selection Sort','Merge Sort','Heap Sort','Insertion Sort','Quick Sort'
+	sort = algoMenu.get()
+	if sort == 'Bubblesort':
+		bubble()
+	elif sort == 'Selection Sort':
+		selection_sort()
+	elif sort == 'Merge Sort':
+		pass
+	elif sort == 'Heap Sort':
+		pass
+	elif sort == 'Insertion Sort':
+		pass
+	else:
+		#Quick Sort 
+		pass
 
+# ------------------------------------------------ ALGORITHMS ---------------------------------------------------
+
+def selection_sort():
 	for i in range(len(data)):
 		min_val = data[i]
 		for j in range(len(data)):
@@ -40,12 +66,23 @@ def selection_sort():
 	DrawData(data)
 
 def bubble():
-	n = len(data)
-	for i in range(n):
-		for j in range(0, n-i-1):
-			if data[j] > data[j+1]:
-				data[j], data[j+1] = data[j+1], data[j]	
-		DrawData(data)
+	counter = 0
+	print("d")
+	issort = False
+	while not issort:
+		for i in range(len(data)-1-counter):
+			if data[i] < data[i+1]:
+				data[i],data[i+1] = data[i+1],data[i]
+				issort = False
+				print("d")
+			else:
+				issort = True
+
+		counter += 1
+
+	DrawData(data)
+
+
 
 # --------------------------------------------------- DRAW GRAPH ----------------------------------------------
 def DrawData(data):
@@ -78,6 +115,7 @@ def DrawData(data):
 root = Tk()
 root.title("Wayne Power")
 root.config(bg="black")
+root.state("zoomed")
 
 #----------------------------------------------------UI FRAME -----------------------------------------------
 userI =Frame(root,height= 600, width= 200,bg='black')
@@ -87,15 +125,6 @@ userI.grid(row = 0, column = 0,padx=8,pady=8,sticky=N)
 canI = Canvas(root, height=600,width=1085)
 canI.grid(row=0,column=1,padx=5,pady=8)
 
-#------------------------------------------------- STATUS --------------------------------------------------
-def caption(status):
-	zo = Label(root,text=status,
-				  fg='white',
-				  bg='black',
-				  font=('Fugaz One',40))
-	zo.grid(row=1,column=1,padx=0,pady=2)
-
-	zo.destroy()
 
 # ---------------------------------------------- USER INTERFACE OPTIONS --------------------------------------
 # --------------------------------------------------- HEADING ------------------------------------------------
@@ -137,7 +166,7 @@ combostyle.theme_create('combostyle', parent='alt',
 
 combostyle.theme_use('combostyle') 
 
-algoMenu = ttk.Combobox(userI,textvariable=selected_algo,values=['Bubblesort','Selection Sort','Merge Sort','Insertion Sort','Quick Sort'],width=20)
+algoMenu = ttk.Combobox(userI,textvariable=selected_algo,values=['Bubblesort','Selection Sort','Merge Sort','Heap Sort','Insertion Sort','Quick Sort'],width=20)
 algoMenu.grid(row=4,column=0,padx=8,pady=8)
 algoMenu.current(0)
 
@@ -157,8 +186,9 @@ gen.grid(row = 7,column=0,pady=25,padx=8)
 
 #---------------------------------------------------- SORT BUTTON -------------------------------------------
 sort = Button(userI,text='START SORTING',
-			  command=bubble,bg='black',fg='white',height=1,width=15,borderwidth=10,font=('Fugaz One',15))
+			  command=whatsort,bg='black',fg='white',height=1,width=15,borderwidth=10,font=('Fugaz One',15))
 sort.grid(row=8,column=0,pady=0,padx=8)
 
+caption(status)
 
 root.mainloop()
